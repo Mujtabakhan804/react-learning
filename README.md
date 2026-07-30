@@ -67,3 +67,90 @@ React mein `useState` tab use hota hai jab hum chahte hain ke variable ki value 
 ## Syntax:
 ```jsx
 const [count, setCount] = useState(0);
+Aap niche diye gaye box se poore notes asani se copy kar sakte hain:
+
+```markdown
+# 📌 JavaScript: `fetch` and `async/await` Notes
+
+---
+
+### 1. `fetch()` kya hai?
+* **Definition:** `fetch()` JavaScript ka ek built-in web API function hai jo browser se server/API ko Network Requests (HTTP requests) bhejne ke liye use hota hai.
+* **Return Value:** Yeh hamesha ek **Promise** return karta hai.
+* **Basic Syntax:**
+  ```javascript
+  fetch(url)
+
+```
+
+---
+
+### 2. `async / await` kya hai?
+
+* **`async` Keyword:** Jab aap kisi function ke shuru mein `async` likhte hain, toh woh function asynchronous ban jata hai aur hamesha ek Promise return karta hai.
+* **`await` Keyword:** Yeh sirf `async` function ke andar use hota hai. Yeh JavaScript ko kehta hai ke jab tak Promise resolve na ho jaye (yaani response na aa jaye), tab tak aage ki line par mat jao.
+* **Fayda:** Code bilkul clean aur readable lagta hai (synchronous code ki tarah).
+
+---
+
+### 💡 Complete Example with Explanation
+
+Yeh ek real-world weather API request ki example hai jisme Error Handling aur Try-Catch bhi shamil hai:
+
+```javascript
+// 1. Function ko 'async' banayein
+const fetchWeatherData = async (cityName) => {
+  
+  // Try-Catch block taake network ya API errors handle ho sakein
+  try {
+    const apiKey = "YOUR_API_KEY";
+    
+    // 2. 'await' lagaya taake fetch ka response aane tak code ruke
+    const response = await fetch(
+      `[https://api.openweathermap.org/data/2.5/weather?q=$](https://api.openweathermap.org/data/2.5/weather?q=$){cityName}&appid=${apiKey}`
+    );
+
+    // 3. Status Check: Agar response OK nahi hai (e.g. 404 City Not Found)
+    if (!response.ok) {
+      throw new Error("City nahi mili ya API Key galat hai!");
+    }
+
+    // 4. Response ko JSON format mein convert karein ('await' ke sath)
+    const data = await response.json();
+
+    // Data ready hai!
+    console.log("Weather Data:", data);
+    console.log("Temperature:", data.main.temp);
+
+  } catch (error) {
+    // Agar poore process mein koi bhi masla aaye (e.g. Internet breakdown)
+    console.error("Error aaya hai:", error.message);
+  }
+};
+
+// Function Call
+fetchWeatherData("Lahore");
+
+```
+
+---
+
+### 🛠️ Step-by-Step Flow (Samajhne ke liye)
+
+1. **Request Send:** `fetch(url)` server ko request bhejta hai.
+2. **Response Wait:** `await fetch()` jab tak network se response nahi milta, execution ko usi line par rok ke rakhta hai.
+3. **HTTP Status Check:** `response.ok` check karta hai ke response status 200–299 ke darmayan hai ya nahi.
+4. **JSON Conversion:** `response.json()` stream response ko readable JS Object mein convert karta hai (is mein bhi `await` lagta hai).
+5. **Error Safety:** `try...catch` ensure karta hai ke agar API server down ho ya network gayab ho, toh app crash na ho balke catch block chal jaye.
+
+---
+
+### 🎯 Quick Recap / Golden Rules
+
+* 🟢 **Rule 1:** Har asynchronous function ke aage `async` likhein.
+* 🟢 **Rule 2:** `fetch()` aur `.json()` dono Promise return karte hain, isliye dono ke sath `await` lagayein.
+* 🟢 **Rule 3:** API requests mein `try...catch` hamesha use karein taake errors ko easily catch kiya ja sake.
+
+```
+
+```
