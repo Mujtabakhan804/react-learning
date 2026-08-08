@@ -81,10 +81,6 @@ Aap niche diye gaye box se poore notes asani se copy kar sakte hain:
   ```javascript
   fetch(url)
 
-```
-
----
-
 ### 2. `async / await` kya hai?
 
 * **`async` Keyword:** Jab aap kisi function ke shuru mein `async` likhte hain, toh woh function asynchronous ban jata hai aur hamesha ek Promise return karta hai.
@@ -120,6 +116,23 @@ const fetchWeatherData = async (cityName) => {
 
     // Data ready hai!
     console.log("Weather Data:", data);
+### 🛠️ Step-by-Step Flow (Samajhne ke liye)
+
+1. **Request Send:** `fetch(url)` server ko request bhejta hai.
+2. **Response Wait:** `await fetch()` jab tak network se response nahi milta, execution ko usi line par rok ke rakhta hai.
+3. **HTTP Status Check:** `response.ok` check karta hai ke response status 200–299 ke darmayan hai ya nahi.
+4. **JSON Conversion:** `response.json()` stream response ko readable JS Object mein convert karta hai (is mein bhi `await` lagta hai).
+5. **Error Safety:** `try...catch` ensure karta hai ke agar API server down ho ya network gayab ho, toh app crash na ho balke catch block chal jaye.
+
+---
+
+### 🎯 Quick Recap / Golden Rules
+
+* 🟢 **Rule 1:** Har asynchronous function ke aage `async` likhein.
+* 🟢 **Rule 2:** `fetch()` aur `.json()` dono Promise return karte hain, isliye dono ke sath `await` lagayein.
+* 🟢 **Rule 3:** API requests mein `try...catch` hamesha use karein taake errors ko easily catch kiya ja sake.
+
+```
 📌 React useEffect Key Notes
 
 1. useEffect UI/JSX Return Nahi Kar Sakta
@@ -157,26 +170,5 @@ With Variable [category]: Jab bhi wo variable/state change hoga, useEffect autom
 // Function Call
 fetchWeatherData("Lahore");
 
-```
 
----
 
-### 🛠️ Step-by-Step Flow (Samajhne ke liye)
-
-1. **Request Send:** `fetch(url)` server ko request bhejta hai.
-2. **Response Wait:** `await fetch()` jab tak network se response nahi milta, execution ko usi line par rok ke rakhta hai.
-3. **HTTP Status Check:** `response.ok` check karta hai ke response status 200–299 ke darmayan hai ya nahi.
-4. **JSON Conversion:** `response.json()` stream response ko readable JS Object mein convert karta hai (is mein bhi `await` lagta hai).
-5. **Error Safety:** `try...catch` ensure karta hai ke agar API server down ho ya network gayab ho, toh app crash na ho balke catch block chal jaye.
-
----
-
-### 🎯 Quick Recap / Golden Rules
-
-* 🟢 **Rule 1:** Har asynchronous function ke aage `async` likhein.
-* 🟢 **Rule 2:** `fetch()` aur `.json()` dono Promise return karte hain, isliye dono ke sath `await` lagayein.
-* 🟢 **Rule 3:** API requests mein `try...catch` hamesha use karein taake errors ko easily catch kiya ja sake.
-
-```
-
-```
