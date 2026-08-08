@@ -120,6 +120,32 @@ const fetchWeatherData = async (cityName) => {
 
     // Data ready hai!
     console.log("Weather Data:", data);
+📌 React useEffect Key Notes
+
+1. useEffect UI/JSX Return Nahi Kar Sakta
+
+Purpose: Iska kaam sirf background tasks (API call, event listeners) handle karna hai.
+
+Cleanup Reserved: Iska return sirf cleanup functions (memory/timer clear karne) ke liye use hota hai.
+
+UI Handling: Loading/Error check aur JSX (<div>) hamesha component ki main body mein return hote hain.
+
+2. fetchData() Ko Call Karne Ki Waja
+
+Execution: Function sirf async () => {} define karne se nahi chalta, usko explicitly call karna padta hai.
+
+React Rule: useEffect(async () => ...) React mein invalid syntax hai, is liye andar function banakar immediately call kiya jata hai.
+
+3. Dependency Array [] Ka Role
+
+Execution Control: Yeh tay karta hai ke effect kab aur kitni baar chalega.
+
+Empty Array []: Code sirf 1 baar chalega (Component Load hone par).
+
+Without Array: Har re-render par chalega, jis se Infinite Loop ban jayega.
+
+With Variable [category]: Jab bhi wo variable/state change hoga, useEffect automatic dobara chalega.
+
     console.log("Temperature:", data.main.temp);
 
   } catch (error) {
